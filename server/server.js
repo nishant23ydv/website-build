@@ -7,27 +7,33 @@ import authRouter from './routes/authRoutes.js'
 import projectRouter from './routes/projectRoutes.js'
 
 const app = express()
+app.set('trust proxy', 1)   // Render ke proxy ke peeche secure cookie ke liye zaruri
+
 await connectToDB()
-app.use(cors({origin: process.env.ORIGINS.split(','), credentials: true}))
+
+const allowedOrigins = (process.env.ORIGINS || '')
+    .split(',')
+    .map((o) => o.trim())
+    .filter(Boolean)
+
+app.use(cors({ origin: allowedOrigins, credentials: true }))
 app.use(cookieParser())
 app.use(express.json())
 
-app.get('/', (req, res)=> res.send('Server is Live! '))
+app.get('/', (req, res) => res.send('Server is Live!'))
 app.use('/api/auth', authRouter)
 app.use('/api/projects', projectRouter)
 
-app.get('/', (req, res)=> res.send('Server is Live!'))
-
-//Centralised Error Handler
-app.use((err, _req, res, _next)=> {
+// Centralised Error Handler
+app.use((err, _req, res, _next) => {
     console.error(`[Error]: ${err.message}`)
     res.status(500).json({
         error: err.message
     })
 })
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 
-app.listen(port, ()=> {
+app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`)
 })
