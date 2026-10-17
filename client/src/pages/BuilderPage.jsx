@@ -88,6 +88,7 @@ const BuilderPage = () => {
 
       {/* Top Bar Header */}
       <BuilderHeader 
+      projectId={id}
       projectName={activeProject.name}
       version={activeProject.version}
       showCode={showCode}

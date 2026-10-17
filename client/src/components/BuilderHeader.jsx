@@ -2,6 +2,7 @@ import { ArrowLeftIcon, Code2Icon ,DownloadIcon,ExternalLinkIcon, EyeIcon, Globe
 import React from "react";
 
 const BuilderHeader = ({
+  projectId,
   projectName,
   version,
   showCode,
@@ -42,11 +43,19 @@ const BuilderHeader = ({
                 )}
             </button>
 
-            <button onClick={onOpenPreview}
+            {/* <button onClick={onOpenPreview}
             className='inline-flex items-center justify-center gap-1.5 py-1.5 px-3 border border-zinc-200 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 text-xs font-medium rounded-lg cursor-pointer bg-white'>
                 <ExternalLinkIcon size={13}/> Open Preview
 
-            </button>
+            </button> */}
+            <a
+  href={`/preview/${projectId}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  className='inline-flex items-center justify-center gap-1.5 py-1.5 px-3 border border-zinc-200 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 text-xs font-medium rounded-lg cursor-pointer bg-white'
+>
+  <ExternalLinkIcon size={13}/> Open Preview
+</a>
 
             <button onClick={onPublish} disabled={publishing}
             className='inline-flex items-center justify-center gap-1.5 py-1.5 px-3 border border-zinc-200 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 text-xs font-medium rounded-lg cursor-pointer bg-white'>

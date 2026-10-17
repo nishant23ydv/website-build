@@ -206,22 +206,7 @@ export function AppContextProvider({ children }) {
           { prompt: message },
         );
         setActiveProject(data);
-        res.json({
-          _id: project._id,
-          name: project.name,
-          description: project.description,
-          files: filesObj,
-          messages: project.messages,
-          version: project.version,
-          status: project.status,
-          filesPlanned: project.filesPlanned,
-          filesGenerated: project.filesGenerated,
-          currentFile: project.currentFile,
-          error: project.error,
-          applied,
-          errors,
-          aiDescription: result.description,
-        });
+        
         if (data.errors && data.errors.length > 0) {
           toast.error(`${data.errors.length} revision pathc(es) failed`);
         } else {
